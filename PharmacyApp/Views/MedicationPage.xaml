@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PharmacyApp.ViewModels"
+
+             x:Class="PharmacyApp.Views.MedicationPage">
+
+    <CollectionView ItemsSource="{Binding Medications}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="10">
+                    <Image Source="{Binding Image}" HeightRequest="100" />
+                    <Label Text="{Binding Name}" />
+                    <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" />
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Button Text="Details" 
+                               Command="{Binding ShowDetailsCommand}"
+                               CommandParameter="{Binding .}"/>
+                        <Button Text="Add to Cart" 
+                                Command="{Binding AddToCartCommand}" 
+                                CommandParameter="{Binding .}" />
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
