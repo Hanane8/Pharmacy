@@ -14,9 +14,9 @@ namespace PharmacyApp.Views
         InitializeComponent();
 
         _service = service;
-        _cartService = cartService; // Assign CartService here
+        _cartService = cartService; 
 
-        // Pass both services to the ViewModel
+        
         BindingContext = new CategoryViewModel(_service, _cartService, selectedCategory);
     }
 }

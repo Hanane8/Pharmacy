@@ -16,22 +16,22 @@ namespace PharmacyApp.Models
         public ObservableCollection<CartItem> Items { get; set; }
         public decimal? Total => Items.Sum(item => item.Total);
 
-        public override string ToString()
-        {
-            string orderDetails = $"Order for {CustomerName}\n" +
-                                  $"Address: {Address}\n" +
-                                  $"Email: {Email}\n" +
-                                  $"Phone: {Phone}\n\n" +
-                                  $"Items:\n";
+        //public override string ToString()
+        //{
+        //    string orderDetails = $"Order for {CustomerName}\n" +
+        //                          $"Address: {Address}\n" +
+        //                          $"Email: {Email}\n" +
+        //                          $"Phone: {Phone}\n\n" +
+        //                          $"Items:\n";
 
-            foreach (var item in Items)
-            {
-                orderDetails += $"{item.Medication.Name} x {item.Quantity} = {item.Total:C}\n";
-            }
+        //    foreach (var item in Items)
+        //    {
+        //        orderDetails += $"{item.Medication.Name} x {item.Quantity} = {item.Total:C}\n";
+        //    }
 
-            orderDetails += $"\nTotal: {Total:C}";
-            return orderDetails;
-        }
+        //    orderDetails += $"\nTotal: {Total:C}";
+        //    return orderDetails;
+        //}
     }
 
 }

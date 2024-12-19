@@ -3,10 +3,17 @@
     x:Class="PharmacyApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:PharmacyApp.Views"
-   
-    Title="PharmacyApp">
+    xmlns:views="clr-namespace:PharmacyApp.Views"  
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="PharmacyApp"
+    Shell.TabBarBackgroundColor="{StaticResource PrimaryDark}"
+    Shell.TabBarTitleColor="{StaticResource White}"
+    Shell.TabBarForegroundColor="{StaticResource White}"
+    Shell.BackgroundColor="{StaticResource PrimaryDark}">
 
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}" />
+    </Shell.Behaviors>
     
 
     <TabBar>
@@ -20,6 +27,7 @@
                       Route="CategoryPage" />
         <ShellContent Title="Details"
                       Route="ProductDetailPage" 
+                      Icon="order_icon.svg"
                       ContentTemplate="{DataTemplate views:ProductDetailPage}" />
 
 

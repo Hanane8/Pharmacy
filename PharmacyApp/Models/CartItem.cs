@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace PharmacyApp.Models
 {
-    public class CartItem
+    public partial class CartItem : ObservableObject
     {
         public Medication? Medication { get; set; }
-        public int Quantity { get; set; }
+
+        [ObservableProperty, NotifyPropertyChangedFor(nameof(Total))]
+        public int quantity;
         public decimal Total => Medication?.Price * Quantity ?? 0;
     }
 

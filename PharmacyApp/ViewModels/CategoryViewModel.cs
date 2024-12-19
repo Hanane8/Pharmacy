@@ -13,7 +13,6 @@ namespace PharmacyApp.ViewModels
         private readonly MedicationService _service;
         private readonly CartService _cartService;
 
-
         public ObservableCollection<Medication> Medications { get; }
 
         public RelayCommand<Medication> AddToCartCommand { get; private set; }
@@ -24,8 +23,7 @@ namespace PharmacyApp.ViewModels
         public CategoryViewModel(MedicationService service, CartService cartService, Category? selectedCategory = null)
         {
             _service = service;
-            _cartService = cartService; // Assign CartService here
-
+            _cartService = cartService; 
             if (selectedCategory != null)
             {
                 Medications = new ObservableCollection<Medication>(_service.GetMedicationsByCategory(selectedCategory.Name));

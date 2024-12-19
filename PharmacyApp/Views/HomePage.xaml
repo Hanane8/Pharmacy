@@ -3,90 +3,82 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PharmacyApp.ViewModels"
              x:Class="PharmacyApp.Views.HomePage"
-             Title="Home"
-             >
-    <ScrollView>
-        <Grid>
-            <VerticalStackLayout Padding="20" Spacing="30">
-                
-                <Label Text="A Pharmacy for all your needs" FontSize="20" HorizontalOptions="Center" FontAttributes="Bold" />
-           
-                <Label Text="Offers" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" />
+             Shell.NavBarIsVisible="False"
+             Title="Home">
+    <Grid>
+        <ScrollView>
+            <Grid>
+                <VerticalStackLayout Padding="10" Spacing="15">
 
-                <!-- offers -->
-                <ScrollView Orientation="Horizontal" HeightRequest="180">
-                    <StackLayout Orientation="Horizontal" Spacing="15" Padding="10">
-                        
-                        <Frame CornerRadius="20" BackgroundColor="#4CAF50" HeightRequest="180" WidthRequest="300">
-                            <Grid>
-                                <BoxView Color="#4CAF50" Opacity="0.5" />
+                    <Label Text="A Pharmacy for all your needs" FontSize="14" HorizontalOptions="Center" FontAttributes="Bold" TextColor="AliceBlue"/>
+
+                    <Label Text="Offers" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" />
+
+                    <!-- Offers Section -->
+                    <ScrollView Orientation="Horizontal" HeightRequest="180">
+                        <HorizontalStackLayout Spacing="15" Padding="10">
+
+                            <!-- Offer 1 -->
+                            <Grid HeightRequest="180" WidthRequest="300" >
+                                <BoxView Color="#4CAF50" CornerRadius="20" Opacity="0.5" />
                                 <Grid RowDefinitions="Auto, *, Auto" Padding="15">
                                     <Label Grid.Row="0" Text="Special Offer!!!" FontSize="18" FontAttributes="Bold" TextColor="White" />
                                     <Label Grid.Row="1" Text="50% off on selected items" FontSize="16" VerticalOptions="Center" TextColor="White" />
                                     <Label Grid.Row="2" Text="CODE123" BackgroundColor="#3A9D23" TextColor="White" Padding="10,5" HorizontalOptions="Center" FontSize="14" />
                                 </Grid>
                             </Grid>
-                        </Frame>
 
-                        <Frame CornerRadius="20" BackgroundColor="#FFC107" HeightRequest="180" WidthRequest="300">
-                            <Grid>
-                                <BoxView Color="#FFC107" Opacity="0.5" />
-                                <Grid RowDefinitions="Auto, *, Auto" Padding="15"> 
+                            <!-- Offer 2 -->
+                            <Grid HeightRequest="180" WidthRequest="300" BackgroundColor="Transparent">
+                                <BoxView Color="#FFC107" CornerRadius="20" Opacity="0.5" />
+                                <Grid RowDefinitions="Auto, *, Auto" Padding="15">
                                     <Label Grid.Row="0" Text="Limited Time Deal!!!" FontSize="18" FontAttributes="Bold" TextColor="Black" />
                                     <Label Grid.Row="1" Text="Buy 1 Get 1 Free" FontSize="16" VerticalOptions="Center" TextColor="Black" />
                                     <Label Grid.Row="2" Text="BOGO123" BackgroundColor="#F7B718" TextColor="Black" Padding="10,5" HorizontalOptions="Center" FontSize="14" />
                                 </Grid>
                             </Grid>
-                        </Frame>
-                    </StackLayout>
-                </ScrollView>
+                        </HorizontalStackLayout>
+                    </ScrollView>
 
-            <Label Text="Shop by Category" FontSize="Large" HorizontalOptions="Center" />
-            <CollectionView ItemsSource="{Binding Categories}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="10" Margin="5">
-                            <StackLayout>
-                                <Image Source="{Binding Image}" HeightRequest="100"/>
-                                <Label Text="{Binding Name}" HorizontalOptions="Center" />
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-                  
+                    <!-- Categories Section -->
+                    <Label Text="Shop by Category" FontSize="Large" HorizontalOptions="Center" />
+                    <CollectionView ItemsSource="{Binding Categories}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10" Margin="5">
+                                    <VerticalStackLayout>
+                                        <Image Source="{Binding Image}" HeightRequest="100"/>
+                                        <Label Text="{Binding Name}" HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
                     <!-- Popular Section -->
                     <Label Text="Popular" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" />
 
                     <!-- Products List -->
                     <HorizontalStackLayout Spacing="15" Padding="10" HorizontalOptions="Center">
                         <!-- First Product Card -->
-                        <Frame CornerRadius="10" Padding="15" BackgroundColor="#FF9800" HeightRequest="180" WidthRequest="150">
+                        <Grid HeightRequest="180" WidthRequest="150" BackgroundColor="#FF9800" Padding="15">
                             <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
                                 <Label Text="Product Name 1" FontSize="18" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                 <Label Text="Description of the product goes here." FontSize="14" TextColor="White" HorizontalTextAlignment="Center" />
                                 <Button Text="View Details" BackgroundColor="White" TextColor="#FF9800" HorizontalOptions="Center" />
                             </VerticalStackLayout>
-                        </Frame>
+                        </Grid>
 
-                    <Frame CornerRadius="10" Padding="15" BackgroundColor="#FF9800" HeightRequest="180" WidthRequest="150">
-                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                            <Label Text="Product Name 1" FontSize="18" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                            <Label Text="Description of the product goes here." FontSize="14" TextColor="White" HorizontalTextAlignment="Center" />
-                            <Button Text="View Details" BackgroundColor="White" TextColor="#FF9800" HorizontalOptions="Center" />
-                        </StackLayout>
-                    </Frame>
-
-                    <!-- Second Product Card -->
-                        <Frame CornerRadius="10" Padding="15" BackgroundColor="#E91E63" HeightRequest="180" WidthRequest="150">
+                        <!-- Second Product Card -->
+                        <Grid HeightRequest="180" WidthRequest="150" BackgroundColor="#E91E63" Padding="15">
                             <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
                                 <Label Text="Product Name 2" FontSize="18" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center" />
                                 <Label Text="Another description here." FontSize="14" TextColor="White" HorizontalTextAlignment="Center" />
                                 <Button Text="View Details" BackgroundColor="White" TextColor="#E91E63" HorizontalOptions="Center" />
                             </VerticalStackLayout>
-                        </Frame>
+                        </Grid>
                     </HorizontalStackLayout>
 
                     <!-- IsBusy Indicator -->
@@ -98,7 +90,7 @@
                         </VerticalStackLayout>
                     </Grid>
                 </VerticalStackLayout>
-
-        </Grid>         
-    </ScrollView>
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>

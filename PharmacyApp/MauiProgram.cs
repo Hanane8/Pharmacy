@@ -28,8 +28,7 @@ namespace PharmacyApp
             builder.Services.AddSingleton<MedicationViewModel>();
             builder.Services.AddSingleton<ProductDetailViewModel>();
 
-            builder.Services.AddSingleton<HomePage>();
-            builder.Services.AddSingleton<HomePage>();
+            builder.Services.AddTransient<HomePage>();
             builder.Services.AddSingleton<OrderPage>();
             builder.Services.AddSingleton<CartPage>();
             builder.Services.AddSingleton<ProductDetailPage>();
