@@ -2,29 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PharmacyApp.Views.CategoryPage"
-             Title="Medications">
+             Title="{Binding CategoryName}">
     <ContentPage.Content>
         <StackLayout Padding="10">
 
-            <!-- Titel -->
-            <Label Text="Medications"
+            <!-- Title -->
+            <Label Text="{Binding CategoryName}"
                    FontSize="24"
                    HorizontalOptions="Center"
                    VerticalOptions="Start" />
 
-            <!-- Lista med mediciner -->
+            <!-- List of medications -->
             <CollectionView ItemsSource="{Binding Medications}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal" Padding="5">
 
-                            <!-- Medicinens bild -->
+                            <!-- Medication image -->
                             <Image Source="{Binding Image}"
                                    WidthRequest="50"
                                    HeightRequest="50"
                                    Margin="0,0,10,0" />
 
-                            <!-- Medicinens detaljer -->
+                            <!-- Medication details -->
                             <StackLayout Orientation="Vertical" VerticalOptions="Center">
                                 <Label Text="{Binding Name}"
                                        FontAttributes="Bold"
@@ -37,16 +37,16 @@
                                        TextColor="Green" />
                             </StackLayout>
 
-                            <!-- Lägg till-knappen -->
+                            <!-- Details button -->
                             <Button Text="Details"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDetailsCommand}"
                                     CommandParameter="{Binding .}"
                                     BackgroundColor="LightBlue"
                                     TextColor="White"
                                     CornerRadius="5"
-                                    Padding="10" /> 
+                                    Padding="10" />
 
-
+                            <!-- Add to Cart button -->
                             <Button Text="Add to Cart"
                                     HorizontalOptions="EndAndExpand"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"

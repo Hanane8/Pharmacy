@@ -25,10 +25,10 @@
                       Icon="categories.png"
                       ContentTemplate="{DataTemplate views:CategoryPage}"
                       Route="CategoryPage" />
-        <ShellContent Title="Details"
+        <!--<ShellContent Title="Details"
                       Route="ProductDetailPage" 
                       Icon="order_icon.svg"
-                      ContentTemplate="{DataTemplate views:ProductDetailPage}" />
+                      ContentTemplate="{DataTemplate views:ProductDetailPage}" />-->
 
 
         <!--<ShellContent Title="Medications"
@@ -51,5 +51,9 @@
                     Route="OrderPage" />-->
 
     </TabBar>
+
+    <ShellContent Route="ProductDetailPage"
+              ContentTemplate="{DataTemplate views:ProductDetailPage}" />
+
 
 </Shell>

@@ -17,7 +17,7 @@
                                Command="{Binding ShowDetailsCommand}"
                                CommandParameter="{Binding .}"/>
                         <Button Text="Add to Cart" 
-                                Command="{Binding AddToCartCommand}" 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
                                 CommandParameter="{Binding .}" />
                     </StackLayout>
                 </Grid>

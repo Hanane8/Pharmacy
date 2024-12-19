@@ -17,11 +17,8 @@ namespace PharmacyApp.ViewModels
     {
         private readonly MedicationService _service;
         private readonly CartService _cartService;
-
-
         [ObservableProperty]
         private ObservableCollection<Medication> medications;
-        //public RelayCommand<Medication> ShowDetailsCommand { get; private set; }
         private Medication _selectedMedication;
         public Medication SelectedMedication
         {
@@ -51,10 +48,9 @@ namespace PharmacyApp.ViewModels
 
             if (medication == null) return;
 
-            // Debugging utskrift för att se om medication.Id är korrekt
+            
             Console.WriteLine($"Navigating to ProductDetailPage with medicationId: {medication.Name}");
 
-            // Navigera till ProductDetailPage och skicka med läkemedels-ID
             await Shell.Current.GoToAsync($"//ProductDetailPage?id={medication.Name}");
         }
 

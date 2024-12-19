@@ -1,6 +1,7 @@
 ﻿using PharmacyApp.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PharmacyApp.Services;
+using CommunityToolkit.Mvvm.Input;
 
 namespace PharmacyApp.ViewModels
 {
@@ -8,6 +9,7 @@ namespace PharmacyApp.ViewModels
     {
         private Medication _selectedProduct;
         private MedicationService _service;
+        private readonly CartService _cartService;
 
         public Medication SelectedProduct
         {
@@ -19,6 +21,17 @@ namespace PharmacyApp.ViewModels
         {
             _service = service;
             SelectedProduct = selectedProduct;
+        }
+
+        [RelayCommand]
+        private async void AddToCart()
+        {
+            if (SelectedProduct == null) return;
+
+            _cartService.AddToCart(SelectedProduct, 1);
+
+            // Visa en bekräftelse
+            await Shell.Current.DisplayAlert("Läkemedel tillagd", $"{SelectedProduct.Name} har lagts till i kundvagnen.", "OK");
         }
     }
 

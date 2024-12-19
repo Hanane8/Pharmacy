@@ -8,66 +8,26 @@ using PharmacyApp.Views;
 
 namespace PharmacyApp.ViewModels
 {
-    public partial class CategoryViewModel : ObservableObject
+    public partial class CategoryViewModel : BaseViewModel
     {
         private readonly MedicationService _service;
         private readonly CartService _cartService;
-
         public ObservableCollection<Medication> Medications { get; }
 
-        public RelayCommand<Medication> AddToCartCommand { get; private set; }
-
-       
-        public RelayCommand<Medication> ShowDetailsCommand { get; private set; }
-
-        public CategoryViewModel(MedicationService service, CartService cartService, Category? selectedCategory = null)
+        public ICommand AddToCartCommand { get; }
+        public ICommand ShowDetailsCommand { get; }
+        public CategoryViewModel(MedicationService service, CartService cartService, Category selectedCategory = null)
+            : base(cartService)
         {
             _service = service;
-            _cartService = cartService; 
-            if (selectedCategory != null)
-            {
-                Medications = new ObservableCollection<Medication>(_service.GetMedicationsByCategory(selectedCategory.Name));
-            }
-            else
-            {
-                Medications = new ObservableCollection<Medication>(_service.Medications);
-            }
+            _cartService = cartService;
+            Medications = selectedCategory != null
+                ? new ObservableCollection<Medication>(_service.GetMedicationsByCategory(selectedCategory.Name))
+                : new ObservableCollection<Medication>(_service.Medications);
 
-            AddToCartCommand = new RelayCommand<Medication>(AddToCart);
-            ShowDetailsCommand = new RelayCommand<Medication>(ShowDetails);
+            AddToCartCommand = new Command<Medication>(AddToCart);
+            ShowDetailsCommand = new Command<Medication>(ShowDetails);
         }
-
-
-        private async void AddToCart(Medication medication)
-        {
-            if (medication == null) return;
-
-            _cartService.AddToCart(medication, 1);
-            await Shell.Current.DisplayAlert("Läkemedel tillagd till kundvagnen!", "", "OK");
-
-            //await Shell.Current.GoToAsync("//CartPage", new Dictionary<string, object> { { "service", _service } });
-        }
-
-        private async void ShowDetails(Medication medication)
-        {
-            if (medication == null) return;
-
-            Console.WriteLine($"Navigating to ProductDetailPage with medicationName: {medication.Name}");
-
-            await Shell.Current.GoToAsync($"//ProductDetailPage?Name={medication.Name}");
-        }
-
-        private async void NavigateToDetails(Medication selectedMedication)
-        {
-            if (selectedMedication != null)
-            {
-                await Shell.Current.GoToAsync(nameof(ProductDetailPage), new Dictionary<string, object>
-        {
-            { "SelectedMedication", selectedMedication }
-        });
-            }
-        }
-
-
+       
     }
 }

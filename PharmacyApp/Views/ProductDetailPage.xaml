@@ -8,6 +8,8 @@
         <Label Text="{Binding SelectedProduct.Description}" FontSize="16" TextColor="Gray" />
         <Label Text="{Binding SelectedProduct.Price, StringFormat='Price: {0:C}'}" FontSize="18" TextColor="Green" />
         <Image Source="{Binding SelectedProduct.Image}" HeightRequest="200" />
-        <Button Text="Add to Cart" Command="{Binding AddToCartCommand}" />
+        <Button Text="Add to Cart" 
+                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
+                CommandParameter="{Binding .}"/>
     </StackLayout>
 </ContentPage>

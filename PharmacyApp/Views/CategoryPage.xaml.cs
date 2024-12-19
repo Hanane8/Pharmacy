@@ -19,6 +19,7 @@ namespace PharmacyApp.Views
         
         BindingContext = new CategoryViewModel(_service, _cartService, selectedCategory);
     }
+
 }
 
 

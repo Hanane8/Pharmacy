@@ -11,6 +11,7 @@ namespace PharmacyApp.ViewModels
     public partial class HomeViewModel : ObservableObject
     {
         private readonly MedicationService _service;
+        private readonly CartService _cartService;
 
         public ObservableCollection<Category> Categories => _service.Categories;
 
@@ -18,9 +19,10 @@ namespace PharmacyApp.ViewModels
         private Category selectedCategory;
 
 
-        public HomeViewModel(MedicationService service)
+        public HomeViewModel(MedicationService service, CartService cartService)
         {
             _service = service;
+            _cartService = cartService;
         }
 
         partial void OnSelectedCategoryChanged(Category value)
@@ -33,8 +35,7 @@ namespace PharmacyApp.ViewModels
         [RelayCommand]
         private async Task NavigateToCategoryPage()
         {
-            var cartService = new CartService(new Cart()); // assuming Cart is a class // or inject it through the constructor
-            await App.Current.MainPage.Navigation.PushAsync(new CategoryPage(_service, cartService, SelectedCategory!));
+                await App.Current.MainPage.Navigation.PushAsync(new CategoryPage(_service, _cartService, SelectedCategory!));
         }
 
     }
