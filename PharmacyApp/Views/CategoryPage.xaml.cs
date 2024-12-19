@@ -9,18 +9,19 @@ namespace PharmacyApp.Views
     private readonly MedicationService _service;
     private readonly CartService _cartService;
 
-    public CategoryPage(MedicationService service, CartService cartService, Category? selectedCategory = null)
-    {
-        InitializeComponent();
+        public CategoryPage(MedicationService service, CartService cartService, Category? selectedCategory = null)
+        {
+            InitializeComponent();
 
-        _service = service;
-        _cartService = cartService; 
+            _service = service;
+            _cartService = cartService;
 
-        
-        BindingContext = new CategoryViewModel(_service, _cartService, selectedCategory);
+            // Pass Navigation to ViewModel
+            BindingContext = new CategoryViewModel(_service, _cartService, selectedCategory);
+        }
+
+
     }
-
-}
 
 
 }

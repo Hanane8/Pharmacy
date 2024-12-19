@@ -29,8 +29,7 @@ namespace PharmacyApp.ViewModels
             if (SelectedProduct == null) return;
 
             _cartService.AddToCart(SelectedProduct, 1);
-
-            // Visa en bekräftelse
+                       
             await Shell.Current.DisplayAlert("Läkemedel tillagd", $"{SelectedProduct.Name} har lagts till i kundvagnen.", "OK");
         }
     }
