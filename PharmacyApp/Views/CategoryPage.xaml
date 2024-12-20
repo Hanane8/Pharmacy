@@ -5,9 +5,8 @@
              Title="{Binding CategoryName}"
              BackgroundColor="#F4F4F4">
 
-    <!-- Use ScrollView to wrap everything so the content can scroll -->
     <ScrollView Padding="15">
-        <!-- Page Title -->
+        
         <StackLayout Spacing="20">
             <Label Text="{Binding CategoryName}"
                    FontSize="24"
@@ -16,7 +15,6 @@
                    VerticalOptions="Start"
                    TextColor="#333" />
 
-            <!-- Category Description (optional) -->
             <Label Text="{Binding CategoryDescription}"
                    FontSize="14"
                    TextColor="Gray"
@@ -24,14 +22,12 @@
                    Margin="0,10" />
         </StackLayout>
 
-        <!-- List of Medications -->
         <CollectionView ItemsSource="{Binding Medications}" Margin="0,10">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="#E0E0E0" CornerRadius="10" Padding="10" BackgroundColor="White" Margin="0,10">
                         <StackLayout Orientation="Horizontal" Spacing="15">
 
-                            <!-- Medication Image -->
                             <Image Source="{Binding Image}"
                                    WidthRequest="70"
                                    HeightRequest="70"
@@ -39,7 +35,6 @@
                                    VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="Center" />
 
-                            <!-- Medication Details -->
                             <StackLayout VerticalOptions="CenterAndExpand" Spacing="5">
                                 <Label Text="{Binding Name}"
                                        FontAttributes="Bold"
@@ -53,9 +48,8 @@
                                        TextColor="Green" />
                             </StackLayout>
 
-                            <!-- Buttons Container -->
                             <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center" Spacing="10" Orientation="Vertical">
-                                <!-- Details Button -->
+                              
                                 <Button Text="Details"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDetailsCommand}"
                                         CommandParameter="{Binding .}"
@@ -65,7 +59,6 @@
                                         Padding="10,5"
                                         CornerRadius="5" />
 
-                                <!-- Add to Cart Button -->
                                 <Button Text="Add to Cart"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
                                         CommandParameter="{Binding .}"

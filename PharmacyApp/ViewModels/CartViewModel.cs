@@ -48,7 +48,7 @@ namespace PharmacyApp.ViewModels
             if (cartItem != null)
             {
                 _cartService.UpdateQuantity(cartItem, cartItem.Quantity + 1);
-                OnPropertyChanged(nameof(Total)); // Trigger total update
+                OnPropertyChanged(nameof(Total)); 
             }
         }
 
@@ -57,7 +57,7 @@ namespace PharmacyApp.ViewModels
             if (cartItem != null && cartItem.Quantity > 1)
             {
                 _cartService.UpdateQuantity(cartItem, cartItem.Quantity - 1);
-                OnPropertyChanged(nameof(Total)); // Trigger total update
+                OnPropertyChanged(nameof(Total)); 
             }
         }
 

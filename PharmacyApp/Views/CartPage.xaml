@@ -9,27 +9,24 @@
     <ScrollView>
         <StackLayout Padding="15" Spacing="20">
 
-            <!-- Page Title -->
-            <Label Text="Din kundvagn" 
+            <Label Text="Cart" 
                    FontSize="24" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" 
                    TextColor="#333" />
 
-            <!-- Cart Items List -->
             <CollectionView ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="#E0E0E0" CornerRadius="10" Padding="10" BackgroundColor="White" Margin="5">
                             <StackLayout Orientation="Horizontal" Spacing="15">
-                                <!-- Medication Name -->
+                                
                                 <Label Text="{Binding Medication.Name}" 
                            FontSize="16" 
                            VerticalOptions="Center" 
                            HorizontalOptions="StartAndExpand" 
                            TextColor="#333"/>
 
-                                <!-- Quantity Adjuster -->
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="5">
                                     <Button Text="-" 
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=DecreaseQuantityCommand}"
@@ -51,13 +48,11 @@
                                 Padding="5,0"/>
                                 </StackLayout>
 
-                                <!-- Item Total Price -->
                                 <Label Text="{Binding Total, StringFormat='Pris: {0:C}'}" 
                            FontSize="16" 
                            HorizontalOptions="End" 
                            TextColor="#333"/>
 
-                                <!-- Remove Item Button -->
                                 <Button Text="Ta bort" 
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=RemoveFromCartCommand}" 
                             CommandParameter="{Binding}" 
@@ -72,8 +67,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-
-            <!-- Total Price -->
             <Label Text="{Binding Total, StringFormat='Total: {0:C}'}" 
                    FontSize="18" 
                    FontAttributes="Bold" 
@@ -81,7 +74,6 @@
                    Margin="0,20,0,10" 
                    TextColor="#333" />
 
-            <!-- Proceed to Checkout Button -->
             <Button Text="Proceed to Checkout" 
                     Command="{Binding ProceedToCheckoutCommand}" 
                     BackgroundColor="#4CAF50" 
