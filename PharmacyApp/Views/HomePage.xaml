@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PharmacyApp.ViewModels"
+             xmlns:models="clr-namespace:PharmacyApp.Models"
+
              x:Class="PharmacyApp.Views.HomePage"
              Shell.NavBarIsVisible="False"
              Title="Home">
@@ -10,85 +12,151 @@
             <Grid>
                 <VerticalStackLayout Padding="10" Spacing="15">
 
-                    <Label Text="A Pharmacy for all your needs" FontSize="14" HorizontalOptions="Center" FontAttributes="Bold" TextColor="AliceBlue"/>
+                    <Label Text="A Pharmacy for all your needs" FontSize="18"  FontAttributes="Bold" />
 
-                    <Label Text="Offers" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" />
+                    <Label Text="Offers" FontSize="24"  FontAttributes="Bold" />
 
                     <!-- Offers Section -->
                     <ScrollView Orientation="Horizontal" HeightRequest="180">
                         <HorizontalStackLayout Spacing="15" Padding="10">
 
-                            <!-- Offer 1 -->
-                            <Grid HeightRequest="180" WidthRequest="300" >
-                                <BoxView Color="#4CAF50" CornerRadius="20" Opacity="0.5" />
+                            <Grid HeightRequest="160" WidthRequest="250" BackgroundColor="Transparent">
+                                <BoxView Color="LawnGreen" CornerRadius="20" Opacity="0.5" />
                                 <Grid RowDefinitions="Auto, *, Auto" Padding="15">
                                     <Label Grid.Row="0" Text="Special Offer!!!" FontSize="18" FontAttributes="Bold" TextColor="White" />
                                     <Label Grid.Row="1" Text="50% off on selected items" FontSize="16" VerticalOptions="Center" TextColor="White" />
-                                    <Label Grid.Row="2" Text="CODE123" BackgroundColor="#3A9D23" TextColor="White" Padding="10,5" HorizontalOptions="Center" FontSize="14" />
+
+                                    <Grid Grid.Row="2" HorizontalOptions="Center">
+                                        <BoxView CornerRadius="20" BackgroundColor="Beige" Opacity="1" HeightRequest="40" WidthRequest="100" />
+                                        <Label Text="CODE123" TextColor="DarkBlue" Padding="10,5" VerticalOptions="Center" HorizontalOptions="Center" FontSize="14" />
+                                    </Grid>
                                 </Grid>
                             </Grid>
 
-                            <!-- Offer 2 -->
-                            <Grid HeightRequest="180" WidthRequest="300" BackgroundColor="Transparent">
+                            <Grid HeightRequest="160" WidthRequest="250" BackgroundColor="Transparent">
                                 <BoxView Color="#FFC107" CornerRadius="20" Opacity="0.5" />
                                 <Grid RowDefinitions="Auto, *, Auto" Padding="15">
                                     <Label Grid.Row="0" Text="Limited Time Deal!!!" FontSize="18" FontAttributes="Bold" TextColor="Black" />
                                     <Label Grid.Row="1" Text="Buy 1 Get 1 Free" FontSize="16" VerticalOptions="Center" TextColor="Black" />
-                                    <Label Grid.Row="2" Text="BOGO123" BackgroundColor="#F7B718" TextColor="Black" Padding="10,5" HorizontalOptions="Center" FontSize="14" />
+                                    <Grid Grid.Row="2" HorizontalOptions="Center">
+                                        <BoxView CornerRadius="20" BackgroundColor="Beige" Opacity="1" HeightRequest="40" WidthRequest="100" />
+                                        <Label Text="BOGO123" TextColor="DarkBlue" Padding="10,5" VerticalOptions="Center" HorizontalOptions="Center" FontSize="14" />
+                                    </Grid>
+                                    
                                 </Grid>
                             </Grid>
                         </HorizontalStackLayout>
                     </ScrollView>
 
                     <!-- Categories Section -->
-                    <Label Text="Shop by Category" FontSize="Large" HorizontalOptions="Center" />
+                    <Label Text="Shop by Category" FontSize="Large" Margin="10" />
                     <CollectionView ItemsSource="{Binding Categories}"
+                                    HeightRequest="175"
                                     SelectionMode="Single"
-                                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"> 
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                            ItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Padding="10" Margin="5">
-                                    <VerticalStackLayout>
-                                        <Image Source="{Binding Image}" HeightRequest="100"/>
-                                        <Label Text="{Binding Name}" HorizontalOptions="Center" />
-                                    </VerticalStackLayout>
-                                </Grid>
+                            <DataTemplate x:DataType="models:Category">
+                                <Border StrokeShape="RoundRectangle 5"
+                                        StrokeThickness="0"
+                                        BackgroundColor="#F5F5F5"
+                                        Padding="5"
+                                        Margin="10">
+                                    <Grid>
+                                        <Image 
+                                            Aspect="AspectFill"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            HeightRequest="175"
+                                            WidthRequest="150"
+                                            Opacity="0.9">  
+                                            <Image.Source>
+                                                <Binding Path="Image"/>
+                                            </Image.Source>
+                                        </Image>
+                                        <Border StrokeShape="RoundRectangle 8"
+                                                StrokeThickness="0"
+                                                BackgroundColor="White"
+                                                VerticalOptions="End"
+                                                Margin="5"
+                                                Padding="10">
+                                            <Label Text="{Binding Name}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="16"
+                                                   HorizontalTextAlignment="Center"
+                                                   TextColor="DarkSlateGray" /> 
+                                        </Border>
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <!-- Popular Section -->
-                    <Label Text="Popular" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" />
+                    <Label Text="Popular" FontSize="24" FontAttributes="Bold" />
 
-                    <!-- Products List -->
-                    <HorizontalStackLayout Spacing="15" Padding="10" HorizontalOptions="Center">
-                        <!-- First Product Card -->
-                        <Grid HeightRequest="180" WidthRequest="150" BackgroundColor="#FF9800" Padding="15">
-                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                <Label Text="Product Name 1" FontSize="18" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                                <Label Text="Description of the product goes here." FontSize="14" TextColor="White" HorizontalTextAlignment="Center" />
-                                <Button Text="View Details" BackgroundColor="White" TextColor="#FF9800" HorizontalOptions="Center" />
-                            </VerticalStackLayout>
-                        </Grid>
+                    <ScrollView Orientation="Horizontal" Padding="10">
+                        <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
 
-                        <!-- Second Product Card -->
-                        <Grid HeightRequest="180" WidthRequest="150" BackgroundColor="#E91E63" Padding="15">
-                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                <Label Text="Product Name 2" FontSize="18" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                                <Label Text="Another description here." FontSize="14" TextColor="White" HorizontalTextAlignment="Center" />
-                                <Button Text="View Details" BackgroundColor="White" TextColor="#E91E63" HorizontalOptions="Center" />
-                            </VerticalStackLayout>
-                        </Grid>
-                    </HorizontalStackLayout>
+                            <!-- First Grid (paracetamol) -->
+                            <Grid HeightRequest="210" WidthRequest="180" Padding="15">
+                                <Border StrokeThickness="1" Stroke="LightGray" StrokeShape="RoundRectangle 10">
+                                    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Spacing="10">
+                                        <Image Source="paracetamol.jpg" 
+                           Aspect="AspectFill" 
+                           HeightRequest="100" 
+                           WidthRequest="100" 
+                           HorizontalOptions="Center" />
+                                        <Button Text="View Details" 
+                            BackgroundColor="AliceBlue" 
+                            TextColor="Blue" 
+                            CornerRadius="15"
+                            HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
 
-                    <!-- IsBusy Indicator -->
-                    <Grid IsVisible="False">
-                        <BoxView Color="Gray" Opacity="0.5" />
-                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                            <ActivityIndicator IsRunning="True" Color="White" HorizontalOptions="Center" />
-                            <Label Text="Fetching data..." TextColor="White" HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                    </Grid>
+                            <!-- Second Grid (aspirin) -->
+                            <Grid HeightRequest="210" WidthRequest="180" Padding="15">
+                                <Border StrokeThickness="1" Stroke="LightGray" StrokeShape="RoundRectangle 10">
+                                    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Spacing="10">
+                                        <Image Source="aspirin.jpg"
+                           Aspect="AspectFill" 
+                           HeightRequest="100" 
+                           WidthRequest="100" 
+                           HorizontalOptions="Center" />
+                                        <Button Text="View Details" 
+                            BackgroundColor="AliceBlue" 
+                            TextColor="Blue" 
+                            CornerRadius="15"
+                            HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+
+                            <!-- Third Grid (vitamin D) -->
+                            <Grid HeightRequest="210" WidthRequest="180" Padding="15">
+                                <Border StrokeThickness="1" Stroke="LightGray" StrokeShape="RoundRectangle 10">
+                                    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Spacing="10">
+                                        <Image Source="vitamin_d.jpg"
+                           Aspect="AspectFill" 
+                           HeightRequest="100" 
+                           WidthRequest="100" 
+                           HorizontalOptions="Center" />
+                                        <Button Text="View Details" 
+                            BackgroundColor="AliceBlue" 
+                            TextColor="Blue" 
+                            CornerRadius="15"
+                            HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+
+                        </HorizontalStackLayout>
+                    </ScrollView>
+
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>

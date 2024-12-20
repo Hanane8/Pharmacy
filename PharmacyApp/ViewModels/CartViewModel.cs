@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Threading.Tasks;
 using PharmacyApp.Models;
-using PharmacyApp.Views;
 using PharmacyApp.Services;
+using PharmacyApp.Views;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace PharmacyApp.ViewModels
 {
@@ -16,10 +16,12 @@ namespace PharmacyApp.ViewModels
         {
             _cartService = cartService;
 
-            // Initiera kommandot för ProceedToCheckout
             ProceedToCheckoutCommand = new AsyncRelayCommand(ProceedToCheckout);
 
-            // Prenumerera på ändringar i kundvagnens innehåll
+            IncreaseQuantityCommand = new RelayCommand<CartItem>(IncreaseQuantity);
+
+            DecreaseQuantityCommand = new RelayCommand<CartItem>(DecreaseQuantity);
+
             _cartService.GetItems().CollectionChanged += (s, e) =>
             {
                 OnPropertyChanged(nameof(Items));
@@ -27,26 +29,42 @@ namespace PharmacyApp.ViewModels
             };
         }
 
-        // Kundvagnens innehåll
+        public RelayCommand<CartItem> IncreaseQuantityCommand { get; }
+
+        public RelayCommand<CartItem> DecreaseQuantityCommand { get; }
+
         public ObservableCollection<CartItem> Items => _cartService.GetItems();
 
-        // Beräknar totalkostnaden för kundvagnen
         public decimal Total => _cartService.GetTotal();
 
-        // Kommando för att ta bort en artikel från kundvagnen
         [RelayCommand]
         private void RemoveFromCart(CartItem cartItem)
         {
             _cartService.RemoveFromCart(cartItem);
-            // OnPropertyChanged är valfritt här eftersom CollectionChanged hanteras ovan
         }
 
-        // Kommando för att gå vidare till kassasidan
+        private void IncreaseQuantity(CartItem cartItem)
+        {
+            if (cartItem != null)
+            {
+                _cartService.UpdateQuantity(cartItem, cartItem.Quantity + 1);
+                OnPropertyChanged(nameof(Total)); // Trigger total update
+            }
+        }
+
+        private void DecreaseQuantity(CartItem cartItem)
+        {
+            if (cartItem != null && cartItem.Quantity > 1)
+            {
+                _cartService.UpdateQuantity(cartItem, cartItem.Quantity - 1);
+                OnPropertyChanged(nameof(Total)); // Trigger total update
+            }
+        }
+
         public IAsyncRelayCommand ProceedToCheckoutCommand { get; }
 
         private Task ProceedToCheckout()
         {
-            // Navigera till OrderPage (kassasidan)
             return Application.Current.MainPage.Navigation.PushAsync(new OrderPage(_cartService));
         }
     }

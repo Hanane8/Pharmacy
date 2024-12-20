@@ -12,7 +12,8 @@ namespace PharmacyApp.Models
         public Medication? Medication { get; set; }
 
         [ObservableProperty, NotifyPropertyChangedFor(nameof(Total))]
-        public int quantity;
+        private int quantity;
+
         public decimal Total => Medication?.Price * Quantity ?? 0;
     }
 

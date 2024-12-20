@@ -2,36 +2,73 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PharmacyApp.Views.OrderPage"
-             Title="Complete Order">
+             Title="Complete Order"
+             BackgroundColor="#F9F9F9">
     <ScrollView>
-        <StackLayout Padding="20">
-            <Label Text="Order Summary" FontSize="Large" FontAttributes="Bold" />
+        <!-- Use a Grid to control the width with a proportional column -->
+        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <!-- Order Items -->
-            <CollectionView ItemsSource="{Binding Items}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Margin="10">
-                            <Label Text="{Binding Medication.Name}" FontSize="Medium" />
-                            <Label Text="x" Margin="5,0" />
-                            <Label Text="{Binding Quantity}" />
-                            <Label Text="{Binding Total, StringFormat='Total: {0:C}'}" HorizontalOptions="EndAndExpand" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <Grid.ColumnDefinitions>
+                <!-- Column will take 80% of the screen width -->
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
 
-            <!-- Total Price -->
-            <Label Text="{Binding Total, StringFormat='Total: {0:C}'}" FontSize="Medium" FontAttributes="Bold" Margin="0,20,0,10" />
+            <VerticalStackLayout Grid.Column="0" Padding="20" Spacing="20">
+                <!-- Title -->
+                <Label Text="Order Summary"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#333"
+                       HorizontalTextAlignment="Center" />
 
-            <!-- User Input -->
-            <Entry Placeholder="Full Name" Text="{Binding CustomerName}" />
-            <Entry Placeholder="Address" Text="{Binding Address}" />
-            <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
-            <Entry Placeholder="Phone" Text="{Binding Phone}" Keyboard="Telephone" />
+                <!-- Order Items -->
+                <Frame BorderColor="#CCCCCC" CornerRadius="10" Padding="10" BackgroundColor="White">
+                    <CollectionView ItemsSource="{Binding Items}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10" ColumnDefinitions="2*, *, Auto">
+                                    <Label Text="{Binding Medication.Name}" FontSize="16" TextColor="#444" />
+                                    <Label Text="{Binding Quantity}" FontSize="16" TextColor="#888" HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding Total, StringFormat='{0:C}'}" FontSize="16" TextColor="#000" HorizontalTextAlignment="End" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
 
-            <!-- Submit Button -->
-            <Button Text="Place Order" Command="{Binding PlaceOrderCommand}" Margin="0,20" />
-        </StackLayout>
+                <!-- Total Price -->
+                <Frame BorderColor="#FF9800" CornerRadius="10" Padding="15" BackgroundColor="#FFF7E0">
+                    <Label Text="{Binding Total, StringFormat='Total: {0:C}'}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#FF9800"
+                           HorizontalOptions="Center" />
+                </Frame>
+
+                <!-- User Input -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Customer Details" FontSize="18" FontAttributes="Bold" TextColor="#333" />
+                    <Entry Placeholder="Full Name" Text="{Binding CustomerName}" BackgroundColor="White" />
+                    <Entry Placeholder="Address" Text="{Binding Address}" BackgroundColor="White" />
+                    <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" BackgroundColor="White" />
+                    <Entry Placeholder="Phone" Text="{Binding Phone}" Keyboard="Telephone" BackgroundColor="White" />
+                </VerticalStackLayout>
+
+                <!-- Submit Button -->
+                <Button Text="Place Order"
+                        Command="{Binding PlaceOrderCommand}"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        FontSize="18"
+                        HorizontalOptions="Fill" />
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

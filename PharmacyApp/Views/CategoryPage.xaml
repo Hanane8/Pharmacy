@@ -2,64 +2,84 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PharmacyApp.Views.CategoryPage"
-             Title="{Binding CategoryName}">
-    <ContentPage.Content>
-        <StackLayout Padding="10">
+             Title="{Binding CategoryName}"
+             BackgroundColor="#F4F4F4">
 
-            <!-- Title -->
+    <!-- Use ScrollView to wrap everything so the content can scroll -->
+    <ScrollView Padding="15">
+        <!-- Page Title -->
+        <StackLayout Spacing="20">
             <Label Text="{Binding CategoryName}"
                    FontSize="24"
+                   FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   VerticalOptions="Start" />
+                   VerticalOptions="Start"
+                   TextColor="#333" />
 
-            <!-- List of medications -->
-            <CollectionView ItemsSource="{Binding Medications}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="5">
+            <!-- Category Description (optional) -->
+            <Label Text="{Binding CategoryDescription}"
+                   FontSize="14"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"
+                   Margin="0,10" />
+        </StackLayout>
 
-                            <!-- Medication image -->
+        <!-- List of Medications -->
+        <CollectionView ItemsSource="{Binding Medications}" Margin="0,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="#E0E0E0" CornerRadius="10" Padding="10" BackgroundColor="White" Margin="0,10">
+                        <StackLayout Orientation="Horizontal" Spacing="15">
+
+                            <!-- Medication Image -->
                             <Image Source="{Binding Image}"
-                                   WidthRequest="50"
-                                   HeightRequest="50"
-                                   Margin="0,0,10,0" />
+                                   WidthRequest="70"
+                                   HeightRequest="70"
+                                   Aspect="AspectFill"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="Center" />
 
-                            <!-- Medication details -->
-                            <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                            <!-- Medication Details -->
+                            <StackLayout VerticalOptions="CenterAndExpand" Spacing="5">
                                 <Label Text="{Binding Name}"
                                        FontAttributes="Bold"
-                                       FontSize="18" />
-                                <Label Text="{Binding Description}" 
-                                       FontSize="14" 
+                                       FontSize="16" 
+                                       TextColor="#333" />
+                                <Label Text="{Binding Description}"
+                                       FontSize="14"
                                        TextColor="Gray" />
                                 <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
-                                       FontSize="16"
+                                       FontSize="14"
                                        TextColor="Green" />
                             </StackLayout>
 
-                            <!-- Details button -->
-                            <Button Text="Details"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDetailsCommand}"
-                                    CommandParameter="{Binding .}"
-                                    BackgroundColor="LightBlue"
-                                    TextColor="White"
-                                    CornerRadius="5"
-                                    Padding="10" />
+                            <!-- Buttons Container -->
+                            <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center" Spacing="10" Orientation="Vertical">
+                                <!-- Details Button -->
+                                <Button Text="Details"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDetailsCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#4CAF50"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Padding="10,5"
+                                        CornerRadius="5" />
 
-                            <!-- Add to Cart button -->
-                            <Button Text="Add to Cart"
-                                    HorizontalOptions="EndAndExpand"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
-                                    CommandParameter="{Binding .}"
-                                    BackgroundColor="LightBlue"
-                                    TextColor="White"
-                                    CornerRadius="5"
-                                    Padding="10" />
+                                <!-- Add to Cart Button -->
+                                <Button Text="Add to Cart"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#FF9800"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Padding="10,5"
+                                        CornerRadius="5" />
+                            </StackLayout>
                         </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
 
-        </StackLayout>
-    </ContentPage.Content>
 </ContentPage>

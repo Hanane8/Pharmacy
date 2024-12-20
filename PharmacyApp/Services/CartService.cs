@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using PharmacyApp.Models;
 
 namespace PharmacyApp.Services
@@ -51,5 +52,13 @@ namespace PharmacyApp.Services
         {
             _cart.Items.Clear();
         }
+        public void UpdateQuantity(CartItem cartItem, int newQuantity)
+        {
+            if (cartItem == null) throw new ArgumentNullException(nameof(cartItem));
+            if (newQuantity <= 0) throw new ArgumentOutOfRangeException(nameof(newQuantity), "Quantity must be greater than zero.");
+
+            cartItem.Quantity = newQuantity; // This triggers the Total recalculation automatically
+        }
+
     }
 }
