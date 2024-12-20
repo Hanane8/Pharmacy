@@ -22,7 +22,7 @@
                       ContentTemplate="{DataTemplate views:HomePage}"
                       Route="HomePage" />
         <ShellContent Title="Medications"
-                      Icon="categories.png"
+                      Icon="category.png"
                       ContentTemplate="{DataTemplate views:CategoryPage}"
                       Route="CategoryPage" />
         <!--<ShellContent Title="Details"
@@ -30,20 +30,17 @@
                       Icon="order_icon.svg"
                       ContentTemplate="{DataTemplate views:ProductDetailPage}" />-->
 
-
         <!--<ShellContent Title="Medications"
                       Icon="medications.png"
                       ContentTemplate="{DataTemplate views:MedicationPage}"
                       Route="MedicationPage" />-->
 
-        <!-- Cart Page -->
         <ShellContent 
                      Title="Cart"
                      Icon="cart.png"
                      ContentTemplate="{DataTemplate views:CartPage}"
                      Route="CartPage" />
 
-        <!-- Order Page -->
         <!--<ShellContent 
                     Title="Orders"
                     Icon="orders.png"

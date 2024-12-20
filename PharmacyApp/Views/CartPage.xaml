@@ -7,66 +7,105 @@
              BackgroundColor="#F4F4F4">
 
     <ScrollView>
-        <StackLayout Padding="15" Spacing="20">
-
+        <StackLayout Padding="10" Spacing="15">
+            <!-- Page Title -->
             <Label Text="Cart" 
                    FontSize="24" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" 
                    TextColor="#333" />
 
+            <!-- Cart Items -->
             <CollectionView ItemsSource="{Binding Items}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="#E0E0E0" CornerRadius="10" Padding="10" BackgroundColor="White" Margin="5">
-                            <StackLayout Orientation="Horizontal" Spacing="15">
-                                
+                        <Frame BorderColor="#E0E0E0" 
+                               CornerRadius="10" 
+                               Padding="10" 
+                               BackgroundColor="White" 
+                               Margin="5">
+                            <Grid ColumnSpacing="10" RowSpacing="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Medication Name -->
                                 <Label Text="{Binding Medication.Name}" 
-                           FontSize="16" 
-                           VerticalOptions="Center" 
-                           HorizontalOptions="StartAndExpand" 
-                           TextColor="#333"/>
+                                       FontSize="16" 
+                                       VerticalOptions="Center" 
+                                       TextColor="#333"
+                                       Grid.Column="0" />
 
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="5">
+                                <!-- Quantity Controls -->
+                                <StackLayout Orientation="Horizontal" 
+             HorizontalOptions="Center" 
+             VerticalOptions="Center"
+             Spacing="5"
+             Grid.Column="1">
+                                    <!-- Decrease Button -->
                                     <Button Text="-" 
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=DecreaseQuantityCommand}"
-                                CommandParameter="{Binding}" 
-                                BackgroundColor="#FF9800" 
-                                TextColor="White" 
-                                Padding="5,0"/>
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=DecreaseQuantityCommand}"
+            CommandParameter="{Binding}" 
+            BackgroundColor="#E0E0E0" 
+            TextColor="Black" 
+            CornerRadius="10"
+            WidthRequest="30" 
+            HeightRequest="30"
+            FontAttributes="Bold" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center" 
+            FontSize="18" />
 
+                                    <!-- Quantity Label -->
                                     <Label Text="{Binding Quantity}" 
-                               VerticalOptions="Center" 
-                               FontSize="14" 
-                               HorizontalOptions="Center"/>
+           VerticalOptions="Center" 
+           HorizontalOptions="Center"
+           FontSize="14" 
+           TextColor="#333" 
+           FontAttributes="Bold" />
 
+                                    <!-- Increase Button -->
                                     <Button Text="+" 
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=IncreaseQuantityCommand}"
-                                CommandParameter="{Binding}" 
-                                BackgroundColor="#FF9800" 
-                                TextColor="White" 
-                                Padding="5,0"/>
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=IncreaseQuantityCommand}"
+            CommandParameter="{Binding}" 
+            BackgroundColor="#E0E0E0" 
+            TextColor="Black" 
+            CornerRadius="10"
+            WidthRequest="30" 
+            HeightRequest="30"
+            FontAttributes="Bold" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center" 
+            FontSize="18" />
                                 </StackLayout>
 
-                                <Label Text="{Binding Total, StringFormat='Pris: {0:C}'}" 
-                           FontSize="16" 
-                           HorizontalOptions="End" 
-                           TextColor="#333"/>
 
-                                <Button Text="Ta bort" 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=RemoveFromCartCommand}" 
-                            CommandParameter="{Binding}" 
-                            BackgroundColor="#FF0000" 
-                            TextColor="White" 
-                            Padding="5,0"
-                            VerticalOptions="Center" 
-                            HorizontalOptions="End"/>
-                            </StackLayout>
+                                <!-- Total Price -->
+                                <Label Text="{Binding Total, StringFormat='Pris: {0:C}'}" 
+                                       FontSize="14" 
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="End"
+                                       TextColor="#333" 
+                                       Grid.Column="2" />
+
+                                <ImageButton Source="remove.png" 
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CartViewModel}}, Path=RemoveFromCartCommand}" 
+                                             CommandParameter="{Binding}"              
+                                             Padding="5" 
+                                             WidthRequest="30" 
+                                             HeightRequest="30" 
+                                             Grid.Column="3" /> 
+
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <!-- Total Price -->
             <Label Text="{Binding Total, StringFormat='Total: {0:C}'}" 
                    FontSize="18" 
                    FontAttributes="Bold" 
@@ -74,6 +113,7 @@
                    Margin="0,20,0,10" 
                    TextColor="#333" />
 
+            <!-- Checkout Button -->
             <Button Text="Proceed to Checkout" 
                     Command="{Binding ProceedToCheckoutCommand}" 
                     BackgroundColor="#4CAF50" 
@@ -81,8 +121,7 @@
                     FontAttributes="Bold" 
                     Padding="15" 
                     CornerRadius="10" 
-                    HorizontalOptions="FillAndExpand"/>
-
+                    HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

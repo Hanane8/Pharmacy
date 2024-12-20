@@ -4,75 +4,72 @@
              x:Class="PharmacyApp.Views.CategoryPage"
              Title="{Binding CategoryName}"
              BackgroundColor="#F4F4F4">
+    <ContentPage.Resources>
+        <!-- Button Styles -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#4CAF50" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Padding" Value="10,5" />
+        </Style>
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+            <Setter Property="BackgroundColor" Value="#FF9800" />
+        </Style>
 
-    <ScrollView Padding="15">
-        
-        <StackLayout Spacing="20">
-            <Label Text="{Binding CategoryName}"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Start"
-                   TextColor="#333" />
+        <!-- Label Styles -->
+        <Style x:Key="LabelTitleStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="#333" />
+        </Style>
+        <Style x:Key="LabelSubtitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="Gray" />
+        </Style>
+    </ContentPage.Resources>
 
-            <Label Text="{Binding CategoryDescription}"
-                   FontSize="14"
-                   TextColor="Gray"
-                   HorizontalOptions="Center"
-                   Margin="0,10" />
-        </StackLayout>
-
-        <CollectionView ItemsSource="{Binding Medications}" Margin="0,10">
+    <ScrollView Padding="10">
+        <CollectionView ItemsSource="{Binding Medications}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="#E0E0E0" CornerRadius="10" Padding="10" BackgroundColor="White" Margin="0,10">
-                        <StackLayout Orientation="Horizontal" Spacing="15">
-
+                    <Frame BorderColor="#E0E0E0" CornerRadius="10" Padding="10" BackgroundColor="White" Margin="0,10"
+                           HasShadow="True">
+                        <Grid ColumnSpacing="10" RowSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <!-- Image -->
                             <Image Source="{Binding Image}"
                                    WidthRequest="70"
                                    HeightRequest="70"
                                    Aspect="AspectFill"
-                                   VerticalOptions="CenterAndExpand"
-                                   HorizontalOptions="Center" />
-
-                            <StackLayout VerticalOptions="CenterAndExpand" Spacing="5">
-                                <Label Text="{Binding Name}"
-                                       FontAttributes="Bold"
-                                       FontSize="16" 
-                                       TextColor="#333" />
-                                <Label Text="{Binding Description}"
-                                       FontSize="14"
-                                       TextColor="Gray" />
+                                   Grid.Column="0" />
+                            <!-- Text Stack -->
+                            <StackLayout VerticalOptions="Center" Spacing="5" Grid.Column="1">
+                                <Label Text="{Binding Name}" Style="{StaticResource LabelTitleStyle}" />
+                                <Label Text="{Binding Description}" Style="{StaticResource LabelSubtitleStyle}" />
                                 <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
-                                       FontSize="14"
+                                       Style="{StaticResource LabelSubtitleStyle}"
                                        TextColor="Green" />
                             </StackLayout>
-
-                            <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center" Spacing="10" Orientation="Vertical">
-                              
+                            <!-- Buttons -->
+                            <StackLayout HorizontalOptions="End" VerticalOptions="Center" Spacing="5" Grid.Column="2">
                                 <Button Text="Details"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDetailsCommand}"
                                         CommandParameter="{Binding .}"
-                                        BackgroundColor="#4CAF50"
-                                        TextColor="White"
-                                        FontAttributes="Bold"
-                                        Padding="10,5"
-                                        CornerRadius="5" />
-
+                                        Style="{StaticResource ButtonStyle}" />
                                 <Button Text="Add to Cart"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
                                         CommandParameter="{Binding .}"
-                                        BackgroundColor="#FF9800"
-                                        TextColor="White"
-                                        FontAttributes="Bold"
-                                        Padding="10,5"
-                                        CornerRadius="5" />
+                                        Style="{StaticResource SecondaryButtonStyle}" />
                             </StackLayout>
-                        </StackLayout>
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
     </ScrollView>
-
 </ContentPage>
