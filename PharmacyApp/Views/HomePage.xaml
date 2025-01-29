@@ -41,7 +41,7 @@
                         <HorizontalStackLayout Spacing="15" Padding="10">
 
                             <!-- Offer 1 -->
-                            <Frame HeightRequest="160" WidthRequest="250" BackgroundColor="#4CAF50" CornerRadius="20" HasShadow="False">
+                            <Frame HeightRequest="160" WidthRequest="250" BackgroundColor="#ADD8E6" CornerRadius="20" HasShadow="False">
                                 <Grid RowDefinitions="Auto, *, Auto" Padding="5">
                                     <Label Grid.Row="0" Text="Special Offer!!!" 
                                            FontSize="14" 
@@ -73,7 +73,7 @@
                             </Frame>
 
                             <!-- Offer 2 -->
-                            <Frame HeightRequest="160" WidthRequest="250" BackgroundColor="#FF7043" CornerRadius="20" HasShadow="False">
+                            <Frame HeightRequest="160" WidthRequest="250" BackgroundColor="BlanchedAlmond" CornerRadius="20" HasShadow="False">
                                 <Grid RowDefinitions="Auto, *, Auto" Padding="5">
                                     <Label Grid.Row="0" Text="Limited Time Deal!!!" 
                                            FontSize="14" 
