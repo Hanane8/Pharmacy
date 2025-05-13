@@ -5,10 +5,10 @@ namespace PharmacyApp.Views
 {
     public partial class CartPage : ContentPage
     {
-        public CartPage(CartService cartService)
+        public CartPage(CartService cartService, EmailService emailService)
         {
             InitializeComponent();
-            BindingContext = new CartViewModel(cartService); 
+            BindingContext = new CartViewModel(cartService, emailService);
         }
     }
 }

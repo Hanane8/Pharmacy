@@ -35,7 +35,7 @@ namespace PharmacyApp.ViewModels
         [RelayCommand]
         private async Task NavigateToCategoryPage()
         {
-                await App.Current.MainPage.Navigation.PushAsync(new CategoryPage(_service, _cartService, SelectedCategory!));
+                await Application.Current.MainPage.Navigation.PushAsync(new CategoryPage(_service, _cartService, SelectedCategory!));
         }
 
     }

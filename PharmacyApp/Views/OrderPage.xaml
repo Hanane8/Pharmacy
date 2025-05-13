@@ -4,9 +4,8 @@
              x:Class="PharmacyApp.Views.OrderPage"
              Title="Complete Order"
              BackgroundColor="#F9F9F9">
-    <ScrollView>
-        <!-- Use a Grid to control the width with a proportional column -->
-        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+    <ScrollView HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -14,11 +13,10 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <!-- Column will take 80% of the screen width -->
-                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <VerticalStackLayout Grid.Column="0" Padding="20" Spacing="20">
+            <VerticalStackLayout Grid.Column="0" Padding="20" Spacing="20" HorizontalOptions="Fill">
                 <!-- Title -->
                 <Label Text="Order Summary"
                        FontSize="24"
@@ -27,7 +25,7 @@
                        HorizontalTextAlignment="Center" />
 
                 <!-- Order Items -->
-                <Frame BorderColor="#CCCCCC" CornerRadius="10" Padding="10" BackgroundColor="White">
+                <Frame BorderColor="#CCCCCC" CornerRadius="10" Padding="10" BackgroundColor="White" HorizontalOptions="Fill">
                     <CollectionView ItemsSource="{Binding Items}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -42,7 +40,7 @@
                 </Frame>
 
                 <!-- Total Price -->
-                <Frame BorderColor="#FF9800" CornerRadius="10" Padding="15" BackgroundColor="#FFF7E0">
+                <Frame BorderColor="#FF9800" CornerRadius="10" Padding="15" BackgroundColor="#FFF7E0" HorizontalOptions="Fill">
                     <Label Text="{Binding Total, StringFormat='Total: {0:C}'}"
                            FontSize="20"
                            FontAttributes="Bold"
@@ -51,7 +49,7 @@
                 </Frame>
 
                 <!-- User Input -->
-                <VerticalStackLayout Spacing="10">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Fill">
                     <Label Text="Customer Details" FontSize="18" FontAttributes="Bold" TextColor="#333" />
                     <Entry Placeholder="Full Name" Text="{Binding CustomerName}" BackgroundColor="White" />
                     <Entry Placeholder="Address" Text="{Binding Address}" BackgroundColor="White" />

@@ -8,7 +8,7 @@ namespace PharmacyApp.ViewModels
     public abstract class BaseViewModel : ObservableObject
     {
         protected readonly CartService CartService;
-        protected readonly MedicationService _service; 
+        protected readonly MedicationService _service;
 
         protected BaseViewModel(CartService cartService)
         {
@@ -26,7 +26,7 @@ namespace PharmacyApp.ViewModels
         {
             if (medication == null) return;
 
-            CartService.AddToCart(medication, 1); 
+            CartService.AddToCart(medication, 1);
             await Shell.Current.DisplayAlert("Medicine Added to the cart", "", "OK");
         }
 
@@ -36,11 +36,8 @@ namespace PharmacyApp.ViewModels
 
             await Application.Current.MainPage.Navigation.PushAsync(new ProductDetailPage(
                 _service,
-                medication 
+                medication
             ));
         }
-
-
-
     }
 }

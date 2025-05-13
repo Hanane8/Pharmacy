@@ -19,25 +19,38 @@ namespace PharmacyApp
             })
                 .UseMauiCommunityToolkit();
 
+            // Register services
             builder.Services.AddSingleton<MedicationService>();
             builder.Services.AddSingleton<CartService>();
             builder.Services.AddSingleton<Cart>();
-            builder.Services.AddSingleton<CartViewModel>();
-            builder.Services.AddSingleton<OrderViewModel>();
-            builder.Services.AddSingleton<CategoryViewModel>();
-            builder.Services.AddSingleton<MedicationViewModel>();
-            builder.Services.AddSingleton<ProductDetailViewModel>();
+            builder.Services.AddSingleton<EmailService>(sp => new EmailService(
+                smtpServer: "smtp.gmail.com", // Replace with your SMTP server
+                smtpPort: 587, // Replace with your SMTP port
+                smtpUsername: "kh.hanane2009@gmail.com", // Replace with your email
+                smtpPassword: "ibtf astm hzix kgmo", // Replace with your app password
+                supplierEmail: "kh.hanane2009@gmail.com" // Replace with supplier's email
+            ));
 
+            // Register ViewModels
+            builder.Services.AddTransient<HomeViewModel>();
+            builder.Services.AddTransient<CartViewModel>();
+            builder.Services.AddTransient<OrderViewModel>();
+            builder.Services.AddTransient<CategoryViewModel>();
+            builder.Services.AddTransient<MedicationViewModel>();
+            builder.Services.AddTransient<ProductDetailViewModel>();
+
+            // Register Views
             builder.Services.AddTransient<HomePage>();
-            builder.Services.AddSingleton<OrderPage>();
-            builder.Services.AddSingleton<CartPage>();
-            builder.Services.AddSingleton<ProductDetailPage>();
-            builder.Services.AddSingleton<CategoryPage>();
-            builder.Services.AddSingleton<MedicationPage>();
-            builder.Services.AddTransient<Medication>();
+            builder.Services.AddTransient<CartPage>();
+            builder.Services.AddTransient<OrderPage>();
+            builder.Services.AddTransient<CategoryPage>();
+            builder.Services.AddTransient<MedicationPage>();
+            builder.Services.AddTransient<ProductDetailPage>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+
             return builder.Build();
         }
     }

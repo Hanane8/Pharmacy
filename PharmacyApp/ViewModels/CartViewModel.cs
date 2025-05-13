@@ -11,10 +11,12 @@ namespace PharmacyApp.ViewModels
     public partial class CartViewModel : ObservableObject
     {
         private readonly CartService _cartService;
+        private readonly EmailService _emailService;
 
-        public CartViewModel(CartService cartService)
+        public CartViewModel(CartService cartService, EmailService emailService)
         {
             _cartService = cartService;
+            _emailService = emailService;
 
             ProceedToCheckoutCommand = new AsyncRelayCommand(ProceedToCheckout);
 
@@ -65,7 +67,7 @@ namespace PharmacyApp.ViewModels
 
         private Task ProceedToCheckout()
         {
-            return Application.Current.MainPage.Navigation.PushAsync(new OrderPage(_cartService));
+            return Application.Current.MainPage.Navigation.PushAsync(new OrderPage(_cartService, _emailService));
         }
     }
 }
