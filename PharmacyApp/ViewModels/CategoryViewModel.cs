@@ -27,6 +27,7 @@ namespace PharmacyApp.ViewModels
 
             AddToCartCommand = new Command<Medication>(AddToCart);
             ShowDetailsCommand = new Command<Medication>(ShowDetails);
+
         }
     }
 }
