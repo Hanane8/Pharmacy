@@ -119,8 +119,8 @@ namespace PharmacyApp.ViewModels
                 // Show success message
                 await Application.Current.MainPage.DisplayAlert("Success", "Order placed successfully and supplier has been notified!", "OK");
 
-                // Navigate back to the previous page using Shell navigation
-                await Shell.Current.GoToAsync("..");
+                // Navigate back to the previous page 
+               await Application.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
