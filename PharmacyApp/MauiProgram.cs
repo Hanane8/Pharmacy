@@ -24,11 +24,11 @@ namespace PharmacyApp
             builder.Services.AddSingleton<CartService>();
             builder.Services.AddSingleton<Cart>();
             builder.Services.AddSingleton<EmailService>(sp => new EmailService(
-                smtpServer: "smtp.gmail.com", // Replace with your SMTP server
-                smtpPort: 587, // Replace with your SMTP port
-                smtpUsername: "kh.hanane2009@gmail.com", // Replace with your email
-                smtpPassword: "ibtf astm hzix kgmo", // Replace with your app password
-                supplierEmail: "kh.hanane2009@gmail.com" // Replace with supplier's email
+                smtpServer: "smtp.gmail.com", //  SMTP server
+                smtpPort: 587, //  SMTP port
+                smtpUsername: "kh.hanane2009@gmail.com", //  email
+                smtpPassword: "ibtf astm hzix kgmo", //  password
+                supplierEmail: "kh.hanane2009@gmail.com" // supplier's email
             ));
 
             // Register ViewModels
